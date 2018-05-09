@@ -1,11 +1,18 @@
 # PyCalculator
 
+Simple syntaxe for complexe data transformation
 
-## CLI
+## Install
+
+```bash
+python3 setup.py install
+```
+
+## Start
+
 ```bash
 pycalc
 ```
-
 
 ## Propotype
 
