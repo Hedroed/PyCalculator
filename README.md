@@ -57,7 +57,7 @@ bit: 1010
 Base64
 ```
 >>> ZXhhbXBsZQ==
-base64: example
+base64: ZXhhbXBsZQ==
 ```
 
 Interger
@@ -87,6 +87,7 @@ hex: 0x20
 
 ### Hash
 ...
+
 
 ### File
 
@@ -139,6 +140,7 @@ Idée de méthodes à redéfinir:
  - toString: appelé quand une donnée de ce type est la valeur de retour
  - format: appelé par **as**
  - detect: appelé pour détecter automatiquement si un string est de ce type. Si `detect` retourn `True` alors la donnée est de ce type est la méthode `format` est appelé.
+ (Systeme de priorité)
 
 Il faudrat ajouter ce type aux registres des types connus
 Exemple:

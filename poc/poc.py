@@ -13,10 +13,11 @@ p_b64 = re.compile(r'[A-Za-z0-9+/]+={0,2}')
 p_int = re.compile(r'[0-9]+')
 p_hex = re.compile(r'(\\x|0x)?[0-9a-fA-F]+')
 
+
 def detectType(arg):
-    
+
     availables_type = ['str', 'int', 'float', 'b64', 'b32', 'hex']
-    
+
     # Manual type
     m = p_quotes.match(arg)
     if m:
@@ -24,7 +25,7 @@ def detectType(arg):
         if arg_type in availables_type:
             return arg_type
         # Else: continue to automatic detection
-    
+
     # Automatic type detection
     if p_int.match(arg):
         return 'int'
@@ -35,8 +36,9 @@ def detectType(arg):
     # Default
     return 'str'
 
+
 def parse(cmd):
-    
+
     m = p_xor.match(cmd)
     if m:
         arg1 = m.group(1)
@@ -50,10 +52,10 @@ def parse(cmd):
 
 
 if __name__ == '__main__':
-    
+
     history = InMemoryHistory()
     status_color = "\033[92m"
-    
+
     while True:
         try:
             cmd = prompt(ANSI(status_color + ">> "), history=history)
@@ -61,7 +63,7 @@ if __name__ == '__main__':
             continue  # Control-C pressed. Try again.
         except EOFError:
             break  # Control-D pressed.
-        
+
         if parse(cmd):
             # Success
             status_color = "\033[92m"
