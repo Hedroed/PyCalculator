@@ -1,6 +1,6 @@
 # PyCalculator
 
-Simple syntaxe for complexe data transformation
+Simple syntax for complex data transformations
 
 ## Requirements
 
@@ -66,8 +66,6 @@ Interger
 int: 12345
 ```
 
-
-
 ### Math
 
 ```
@@ -81,13 +79,34 @@ Math operation return value of type of the first operand
 hex: 0x20
 ```
 
-### Crypto (RSA, XOR)
-...
+### Crypto
 
+> **TODO:** Find syntax for the following
 
-### Hash
-...
+- RSA
+  - private key generation
+  - public key generation
+- Hash (MD5, SHA1, SHA256, ...)
+- Caesar
+  - With key
+  - Bruteforce
+- ASCII Caesar
+  - With key
+  - Bruteforce
+- XOR
+  - With key
+  - Known-plaintext attack
+  - Xored plaintext attack (cf cryptopals)
 
+### Encoding
+
+> **TODO:** Find syntax for the following
+
+- URL encode / decode
+- Double encode
+- Base64
+- Base32
+- Hex
 
 ### File
 
@@ -118,7 +137,6 @@ List of possible data types:
  - binFile
  - textFile
 
-
 ### Operator
 
 List of possible operator:
@@ -130,7 +148,6 @@ List of possible operator:
  - `as`
  - `xor` / `^`
  - `rsa`
-
 
 ### Types definition
 
