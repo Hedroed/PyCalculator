@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # coding: utf-8
 
-import BaseType
+from BaseType import BaseType
 # import registerType de je ne sais où ?
 import re
 
