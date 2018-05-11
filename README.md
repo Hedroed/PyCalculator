@@ -123,6 +123,16 @@ bytes: \x41\x20\x62\x69\x6e...\x20\x66\x69\x6c\x65
 - Base32
 - Hex
 
+
+Url encode and decode
+```
+>>> urlEncode "' or 1=1 #"
+ascii: %27%20or%201%3D1%20%23
+
+>>> urlDecode %27%20or%201%3D1%20%23
+ascii: ' or 1=1 #
+```
+
 ### File
 
 Load data from file
@@ -159,6 +169,25 @@ bin: 1010 (tmp)
 unicode: a string (f)
 ```
 
+### Functions
+
+```
+>>> abs -42
+int: 42
+```
+
+Factorial
+```
+>>> ! 0b101 to int
+int: 120
+```
+
+Piping ?
+```
+>>>
+```
+
+
 ### Types
 
 List of possible data types:
@@ -174,21 +203,22 @@ List of possible data types:
  - binFile
  - textFile
 
+### Modifier
+
+Modifiers affect a single data, it is not an operator
+
+List of modifiers:
+ - `to` / `.`
+ - `as`
+ - `in`
+
 ### Operator
-
-There are 3 types of operators:
- - modifiers (as, to, in)
- - computers with one operand (factorial)
- - computers with tow operand(+, -, xor, rsa...)
-
 
 List of possible operator:
  - `+`
  - `-`
  - `/`
  - `*`
- - `to` / `.`
- - `as`
  - `xor` / `^`
  - `rsa`
 
@@ -245,14 +275,15 @@ class Addition(BaseOperator):
     default = 'Int'
     symbols = ['+']
 
-    def __init__(self):
-        self.registerOperationFor('Hex', self.hexOp)
-
-
     def compute(self, first, second):
         return first + second
 
+    @self.registerOp('Hex')
     def hexOp(self, first, second):
+        return first + second
+
+    @self.registerOp('Ascii')
+    def asciiConcat(self, first, second):
         return first + second
 
 # Register an Object
@@ -284,7 +315,7 @@ Cut operation:
  - 12345678 to base64:
  1) Call `detect` of all **Type** and make list of possible **Type**: Here there is only 'Int'
  2) Call format method of `Int` and save data in **Data** object as *current value*
- 3) Find operator: is `to` for conversion
+ 3) Find modifier: is `to` for convertion
  4) Find **Type** to convert: is `base64`
  5) Find if there is specific method in `Int` to convert to `base64`
  6) No specific method, so convert `Int` to default **Type**: `Bytes`
@@ -293,16 +324,16 @@ Cut operation:
  9) A data of **Type** `base64` is created
 
  - ... in myVar
- 1) Find next operator: is `in` for variable
+ 1) Find next modifier: is `in` for variable
  2) Get varable name: `myVar`
  3) Save *current value* in variable dictionnary
 
  - ... write ...
- 1) Find next operator: is `write`, is not a built in operator
- 2) compute the ***Second*** operand, start after `write` and stop at the next *not a built in operator* or the end of the line
+ 1) Find next operator: is `write`, is not a modifier
+ 2) compute the ***Second*** operand, start after `write` and stop at the next operator or the end of the line
 
  - /tmp/file.txt as textFile
- 1) Detect the `as` operator
+ 1) Detect the `as` modifier
  2) Find the **Type**: is `textFile`
  3) Call format of `textFile`
  4) A data of **Type** `textFile` is created
@@ -322,3 +353,10 @@ Return at `write` operator
  4) print a column (:)
  5) print return of toString
 
+
+### CLI integration (BASH)
+
+Example:
+```shell
+KnownXorAttack.py /tmp/crypt ${pycalc -c "169846466316 to ascii"} > /tmp/file.decrypt
+```
