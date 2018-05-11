@@ -203,21 +203,22 @@ List of possible data types:
  - binFile
  - textFile
 
+### Modifier
+
+Modifiers affect a single data, it is not an operator
+
+List of modifiers:
+ - `to` / `.`
+ - `as`
+ - `in`
+
 ### Operator
-
-There are 3 types of operators:
- - modifiers (as, to, in)
- - computers with one operand (factorial)
- - computers with tow operand(+, -, xor, rsa...)
-
 
 List of possible operator:
  - `+`
  - `-`
  - `/`
  - `*`
- - `to` / `.`
- - `as`
  - `xor` / `^`
  - `rsa`
 
