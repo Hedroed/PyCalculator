@@ -21,7 +21,7 @@ class Integer(BaseType):
         '''Is value an Integer ?
             Test if value is only compose of digits from 0 to 9.
         '''
-        return re.match(r'^[0-9]+$', value) != None
+        return re.match(r'^[0-9]+$', value) is None
 
     def fromBytes(self, _bytes):
         '''Convert bytes to Integer using big endian'''
