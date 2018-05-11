@@ -5,7 +5,7 @@
 You need **pytest** to launch the tests. You can install pytest the following way:
 
 ```
-sudo pip install pytest
+sudo pip3 install pytest
 ```
 
 ## Run the tests
