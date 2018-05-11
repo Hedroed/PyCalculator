@@ -98,6 +98,21 @@ hex: 0x20
   - Known-plaintext attack
   - Xored plaintext attack (cf cryptopals)
 
+
+Caesar
+```
+>>> '57 69 59 5f 5f 55 59 57 5b 69 57 68' as bytes caesar 10 to ascii
+ascii: ascii_caesar
+```
+
+
+Xor bin file with known key
+```
+>>> tmp/file.crypt as binFile xor TheSecretKey write /tmp/out as binFile
+bytes: \x41\x20\x62\x69\x6e...\x20\x66\x69\x6c\x65
+```
+
+
 ### Encoding
 
 > **TODO:** Find syntax for the following
