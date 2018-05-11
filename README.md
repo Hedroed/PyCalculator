@@ -169,6 +169,25 @@ bin: 1010 (tmp)
 unicode: a string (f)
 ```
 
+### Functions
+
+```
+>>> abs -42
+int: 42
+```
+
+Factorial
+```
+>>> ! 0b101 to int
+int: 120
+```
+
+Piping ?
+```
+>>>
+```
+
+
 ### Types
 
 List of possible data types:
