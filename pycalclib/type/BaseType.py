@@ -26,7 +26,10 @@ class BaseType(abc.ABC):
         The value return by format will be store in variable.
 
         Args:
-            value (str): The input value from the interpretor.
+            value (str): Input value from the interpretor.
+
+        Returns:
+            any: the value in a convinient format for the type.
         """
         pass
 
@@ -37,7 +40,10 @@ class BaseType(abc.ABC):
         If return True this value can be of this type.
 
         Args:
-            value (str): The input value from the interpretor.
+            value (str): Input value from the interpretor.
+
+        Returns:
+            bool: True if value match type representation.
         """
         pass
 
@@ -48,7 +54,10 @@ class BaseType(abc.ABC):
         This method is call to convert types.
 
         Args:
-            _bytes (bytes): The value in bytes to convert in this type.
+            _bytes (bytes): Value in bytes to convert in this type.
+
+        Returns:
+            any: Return the same type that format method.
         """
         pass
 
@@ -59,7 +68,11 @@ class BaseType(abc.ABC):
         This method is call to convert types.
 
         Args:
-            value (any): The value to convert in bytes.
+            value (any): Value in the same type that format method to convert in bytes.
+
+        Returns:
+            bytes: Return the value to a python bytes form.
+
         """
         pass
 
@@ -70,6 +83,9 @@ class BaseType(abc.ABC):
         Call to display the value to the user.
 
         Args:
-            value (any): A value of this type.
+            value (any): Value in the same type that format method.
+
+        Returns:
+            str: a string representation of the value
         """
         pass
