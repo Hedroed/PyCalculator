@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # coding: utf-8
 
-from BaseType import BaseType
+from .BaseType import BaseType
 # import registerType de je ne sais où ?
 import re
 
@@ -23,7 +23,7 @@ class Hexadecimal(BaseType):
             An hexadecimal value can preceded by '\\x' or '0x'.
             Spaces can be presents in an hexadecimal string.
         '''
-        return re.match(r'^\s*((\\x|0x)[0-9a-fA-F\s]+)+\s*$', value) is not None
+        return re.match(r'^\s*((\\x|0x)?[0-9a-fA-F\s]+)+\s*$', value) is not None
 
     def fromBytes(self, _bytes):
         '''Convert bytes to Hexadecimal'''
@@ -35,7 +35,7 @@ class Hexadecimal(BaseType):
 
         hexString = re.sub(' ', '', value)
         hexString = hexString.replace('\\x', ' ').replace('0x', ' ').split()
-        
+
         for block in hexString:
             if len(block) % 2 != 0:
                 block = '0' + block
