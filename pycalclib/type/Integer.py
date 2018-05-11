@@ -11,7 +11,7 @@ class Integer(BaseType):
         An Integer is a number that can be written without a fractional component.
         An Integer is only compose of digits from 0 to 9.
     '''
-    name = 'Int'
+    name = 'int'
 
     def format(self, value):
         '''Format string to Integer'''
