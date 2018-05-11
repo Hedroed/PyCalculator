@@ -1,6 +1,6 @@
 # PyCalculator
 
-Simple syntax for complex data transformations
+Simple syntax for complex data transformations.
 
 ## Requirements
 
@@ -224,25 +224,25 @@ List of possible operator:
 
 ### Types definition
 
-Un **Type** est une class *Python* qui hérite d'une class particulière
+Un **Type** est une class *Python* qui hérite d'une classe particulière.
 
 Idée de méthodes à redéfinir:
- - toString: appelé quand une donnée de ce type est la valeur de retour
+ - toString: appelée quand une donnée de ce type est la valeur de retour
  - format: appelé par **as**
- - detect: appelé pour détecter automatiquement si un string est de ce type. Si `detect` retourn `True` alors la donnée est de ce type est la méthode `format` est appelé.
+ - detect: appelé pour détecter automatiquement si un string est de ce type. Si `detect` retourne `True`, alors la donnée est de ce type et la méthode `format` est appelée.
  (Systeme de priorité)
- - toBytes and fromBytes: for default convertion
+ - toBytes and fromBytes: for default conversion
 
-Un type aura un nom pour le differencier des autres types, par default il prendra le nom de ça class mais il sera possible de le redefinir
+Un type aura un nom pour le différencier des autres types, par défaut il prendra le nom de sa classe mais il sera possible de le redéfinir.
 
 Il faudrat ajouter ce type aux registres des types connus
 Exemple:
 
 ```python
-from pycalclib import registerType, TypeBase
+from pycalclib import registerType, BaseType
 import re
 
-class PCInt(TypeBase):
+class PCInt(BaseType):
     name = 'Int'
 
     def format(self, value):
@@ -260,18 +260,18 @@ registerType(Int())
 
 ### Operator definition
 
-Un **Operator* est une class *Python* qui hérite d'une class particulière
+Un **Operator* est une classe *Python* qui hérite d'une classe particulière.
 
-Une operation doit avoir un type par defaut pour effectuer son calcule
-Il sera possible de specifier un comportement en fonction de **Type** particulier
+Une opération doit avoir un type par défaut pour effectuer son calcule.
+Il sera possible de spécifier un comportement en fonction d'un **Type** particulier.
 
-Il faudra definir le *symbol* qui permet de reconnaitre l'operation, il pourrait y en avoir plusieurs (`xor` et `^`)
+Il faudra définir le *symbol* qui permet de reconnaitre l'operation, il pourrait y en avoir plusieurs (`xor` et `^`)
 
 Exemple:
 ```python
-from pycalclib import registerOperator, OperatorBase
+from pycalclib import registerOperator, BaseOperator
 
-class Addition(OperatorBase):
+class Addition(BaseOperator):
     default = 'Int'
     symbols = ['+']
 
@@ -292,14 +292,15 @@ registerOperator(Addition())
 
 ### Stockage des données
 
-Une donnée sera stocké dans un object **Data**
+Une donnée sera stockée dans un objet **Data**.
+
 Il contiendra:
  - la valeur sous n'importe quelle forme
  - le nom du type de cette valeur
 
 Les variable seront stockées dans un dictionnaire avec :
  - comme clé le nom de la variable
- - comme valeur l'object **Data**
+ - comme valeur l'objet **Data**
 
 
 ### Interpretor
