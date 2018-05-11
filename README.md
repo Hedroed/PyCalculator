@@ -123,6 +123,16 @@ bytes: \x41\x20\x62\x69\x6e...\x20\x66\x69\x6c\x65
 - Base32
 - Hex
 
+
+Url encode and decode
+```
+>>> urlEncode "' or 1=1 #"
+ascii: %27%20or%201%3D1%20%23
+
+>>> urlDecode %27%20or%201%3D1%20%23
+ascii: ' or 1=1 #
+```
+
 ### File
 
 Load data from file
