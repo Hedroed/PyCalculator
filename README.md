@@ -169,24 +169,6 @@ bin: 1010 (tmp)
 unicode: a string (f)
 ```
 
-### Functions
-
-```
->>> abs -42
-int: 42
-```
-
-Factorial
-```
->>> ! 0b101 to int
-int: 120
-```
-
-Piping ?
-```
->>>
-```
-
 
 ### Types
 
@@ -197,8 +179,8 @@ List of possible data types:
  - Bytes
  - Bitarray / Bits
  - Hex
- - Base64
- - Base32
+ <!-- - Base64
+ - Base32 -->
  - Octal ?
  - binFile
  - textFile
@@ -221,6 +203,59 @@ List of possible operator:
  - `*`
  - `xor` / `^`
  - `rsa`
+ - `abs'
+ - `factorial` / `!`
+
+
+Operator like python function but it can take the first parameter at this left. This allow to chain operator
+
+```
+>>> abs -42
+int: 42
+```
+
+Factorial
+```
+>>> ! 0b101 to int
+int: 120
+```
+
+chaining
+```
+>>> -4 abs factorial
+int: 24
+```
+
+To string operator, not the same as `to ascii`
+```
+>>> 6162 string
+ascii: 6162
+
+>>> 6162 to ascii
+ascii: ab
+```
+Because `to` will transform value to bytes before convert.
+
+
+### computation order and priority
+
+The interpretor read code from left to right but it is possible to use parenthesis to make action prioritary.
+
+example:
+```
+>>> 42 * (a as hex - 8)
+int: 84
+```
+
+
+### Escaping space
+
+To escape space it is possible to use the `\` escape charactere.
+Put text in `"` also escape space.
+
+If you want to escape the first sentence and you have forgot to place a `"` at the start you can just put a `"` at the end to the sentence and the interpretor with automatically place a `"` at the start.
+
+
 
 ### Types definition
 
