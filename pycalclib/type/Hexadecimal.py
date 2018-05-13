@@ -36,7 +36,7 @@ class Hexadecimal(BaseType):
         return re.match(r'^\s*((\\x|0x)?[0-9a-fA-F\s]+)+\s*$', value) is not None
 
     def fromBytes(self, _bytes):
-        '''Convert bytes to Hexadecimal'''
+        '''Convert bytes to bytes (do nothing)'''
         return _bytes
 
     def toBytes(self, _bytes):
