@@ -37,7 +37,7 @@ class Hexadecimal(BaseType):
 
     def fromBytes(self, _bytes):
         '''Convert bytes to Hexadecimal'''
-        return _bytes.hex()
+        return _bytes
 
     def toBytes(self, _bytes):
         '''Convert bytes to bytes (do nothing)'''
@@ -45,7 +45,7 @@ class Hexadecimal(BaseType):
 
     def toString(self, _bytes):
         '''Return value as string'''
-        hexString = self.fromBytes(_bytes).upper()
+        hexString = _bytes.hex().upper()
         return ':'.join(hexString[i:i+2] for i in range(0, len(hexString), 2))
 
 
