@@ -33,7 +33,7 @@ class Integer(BaseType):
 
     def toString(self, value):
         '''Return value as string'''
-        return value
+        return str(value)
 
 
 # Register the type
