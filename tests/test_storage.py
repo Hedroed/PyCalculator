@@ -1,4 +1,6 @@
 from pycalclib.Storage import Storage
+from pycalclib.Data import Data
+from pycalclib.Manager import Manager
 
 
 def test_storage_varaible_creation():
