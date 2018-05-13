@@ -15,7 +15,17 @@ class Hexadecimal(BaseType):
 
     def format(self, value):
         '''Format hexadecimal string to bytes'''
-        return self.toBytes(value)
+        _bytes = b''
+
+        hexString = re.sub(' ', '', value)
+        hexString = hexString.replace('\\x', ' ').replace('0x', ' ').split()
+
+        for block in hexString:
+            if len(block) % 2 != 0:
+                block = '0' + block
+            _bytes += bytearray.fromhex(block)
+
+        return _bytes
 
     def detect(self, value):
         '''Is value an Hexadecimal ?
@@ -29,18 +39,8 @@ class Hexadecimal(BaseType):
         '''Convert bytes to Hexadecimal'''
         return _bytes.hex()
 
-    def toBytes(self, value):
-        '''Convert Hexadecimal to bytes'''
-        _bytes = b''
-
-        hexString = re.sub(' ', '', value)
-        hexString = hexString.replace('\\x', ' ').replace('0x', ' ').split()
-
-        for block in hexString:
-            if len(block) % 2 != 0:
-                block = '0' + block
-            _bytes += bytearray.fromhex(block)
-
+    def toBytes(self, _bytes):
+        '''Convert bytes to bytes (do nothing)'''
         return _bytes
 
     def toString(self, _bytes):
