@@ -4,7 +4,7 @@
 from abc import ABC, abstractmethod
 
 
-class BaseType(abc.ABC):
+class BaseType(ABC):
     """Define a abstract Type object
 
     Attributes:
