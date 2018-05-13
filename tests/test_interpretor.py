@@ -1,7 +1,7 @@
 """Test iterpretor result
 """
 
-from pycalclib.Interpretor import Interpretor, ExecutionResult
+from pycalclib.Interpretor import Interpretor, ExecutionResult, ExecutionLine, Scope
 from pycalclib.Data import Data, Variable
 from pycalclib.Manager import Manager
 from pycalclib.Storage import Storage
@@ -59,3 +59,32 @@ def test_store_in_variable():
     assert res == expecedResult
     assert var in res.created_variables
     assert var == i.storage.getVariable('var1')
+
+
+def test_ExecutorLine_quote_auto_completion():
+    line = ExecutionLine("la phrase\" as bytes")
+
+    assert line.line == "\"la phrase\" as bytes"
+
+
+def test_ExecutorLine_parentesis_optimisation():
+    line = ExecutionLine("1 + ((((2 * 2))))")
+
+    assert line.line == "1 + (2 * 2)"
+
+
+def test_scope_heap_creation():
+    line = ExecutionLine("1 + 1")
+    scope = Scope(line)
+
+    assert scope.heap == ["1", "+", "1"]
+
+    line2 = ExecutionLine("a as hex + (14 % 4)")
+    scope2 = Scope(line)
+
+    assert scope2.heap == ["a", "as", "hex", "+", "(14 % 4)"]
+
+    line3 = ExecutionLine("\"une phrase\" as hex")
+    scope3 = Scope(line)
+
+    assert scope3.heap == ["\"une phrase\"", "as", "hex"]
