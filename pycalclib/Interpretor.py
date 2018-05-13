@@ -29,7 +29,6 @@ class ExecutionResult():
     used_vars = None
     used_types = None
     used_operations = None
-    used_functions = None
     errors = None
 
     def __init__(self, current_value):
