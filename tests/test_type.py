@@ -4,6 +4,7 @@
 from pycalclib.type.Integer import Integer
 from pycalclib.type.Hexadecimal import Hexadecimal
 from pycalclib.type.String import String
+from pycalclib.type.Base64 import Base64
 
 
 # Integer tests
@@ -56,6 +57,7 @@ def test_Integer_toString():
 def test_Hexadecimal_format():
     h = Hexadecimal()
     assert h.format('4256') == b'\x42\x56'
+    assert h.format(' 4256 ') == b'\x42\x56'
     assert h.format('14256') == b'\x01\x42\x56'
     assert h.format('ABE5') == b'\xab\xe5'
     assert h.format('\\x42\\x56') == b'\x42\x56'
@@ -69,6 +71,7 @@ def test_Hexadecimal_format():
 def test_Hexadecimal_detect():
     h = Hexadecimal()
     assert h.detect('4556')
+    assert h.detect('45 56 76')
     assert h.detect('455E6AC')
     assert h.detect('\\x42\\x56')
     assert h.detect('0x4256')
@@ -98,15 +101,8 @@ def test_Hexadecimal_fromBytes():
 
 def test_Hexadecimal_toBytes():
     h = Hexadecimal()
-    assert h.toBytes('4256') == b'\x42\x56'
-    assert h.toBytes('14256') == b'\x01\x42\x56'
-    assert h.toBytes('ABE5') == b'\xab\xe5'
-    assert h.toBytes('\\x42\\x56') == b'\x42\x56'
-    assert h.toBytes('0x4256') == b'\x42\x56'
-    assert h.toBytes('0x42\\x56') == b'\x42\x56'
-    assert h.toBytes('0x42\\x50x6') == b'\x42\x05\x06'
-    assert h.toBytes('0x60x70x80x09') == b'\x06\x07\x08\x09'
-    assert h.toBytes('\\x5\\x12\\x04') == b'\x05\x12\x04'
+    assert h.toBytes(b'\x42\x56') == b'\x42\x56'
+    assert h.toBytes(b'') == b''
 
 
 def test_Hexadecimal_toString():
@@ -143,7 +139,6 @@ def test_String_fromBytes():
     assert s.fromBytes(b"Hello") == "Hello"
     assert s.fromBytes(b"") == ""
     assert s.fromBytes(b'a@!\xc3\xa9`\xc3\xa8L^&\xc3\xa0\xc3\xa7') == "a@!é`èL^&àç"
-    # assert s.fromBytes(b'\xf6') == -10
 
 
 def test_String_toBytes():
@@ -158,3 +153,50 @@ def test_String_toString():
     assert s.toString("Hello") == "Hello"
     assert s.toString("") == ""
     assert s.toString("a@!é`èL^&àç") == "a@!é`èL^&àç"
+
+
+# Base64 tests
+
+def test_Base64_format():
+    b64 = Base64()
+    assert b64.format('SGVsbG8=') == b"Hello"
+    assert b64.format(' SGVsbG8= ') == b"Hello"
+    assert b64.format("") == b""
+    assert b64.format("YUAhw6lgw6hMXibDoMOn") == "a@!é`èL^&àç".encode()
+    assert b64.format("AwQF") == b"\x03\x04\x05"
+
+
+def test_Base64_detect():
+    b64 = Base64()
+    assert b64.detect('SGVsbG8=')
+    assert b64.detect(' SGVsbG8= ')
+    assert b64.detect("YUAhw6lgw6hMXibDoMOn")
+    assert b64.detect("YUAhw6lgw6hMXibDoMOn==")
+    assert b64.detect("")
+    assert not b64.detect("YUAhw6lgw6hMXibDoMOn===")
+    assert not b64.detect("àYUAhw6lgw6hMXibDoMOn==")
+    assert not b64.detect("Hello!")
+
+
+def test_Base64_fromBytes():
+    b64 = Base64()
+    assert b64.fromBytes(b"Hello") == b'SGVsbG8='
+    assert b64.fromBytes(b"") == b""
+    assert b64.fromBytes("a@!é`èL^&àç".encode()) == b"YUAhw6lgw6hMXibDoMOn"
+    assert b64.fromBytes(b"\x03\x04\x05") == b"AwQF"
+
+
+def test_Base64_toBytes():
+    b64 = Base64()
+    assert b64.toBytes(b"Hello") == b"Hello"
+    assert b64.toBytes(b"") == b""
+    assert b64.toBytes("a@!é`èL^&àç".encode()) == "a@!é`èL^&àç".encode()
+    assert b64.toBytes(b"\x03\x04\x05") == b"\x03\x04\x05"
+
+
+def test_Base64_toString():
+    b64 = Base64()
+    assert b64.toString(b"Hello") == "Hello"
+    assert b64.toString(b"") == ""
+    assert b64.toString("a@!é`èL^&àç".encode()) == "a@!é`èL^&àç"
+    assert b64.toString(b"\x03\x04\x05") == "\x03\x04\x05"
