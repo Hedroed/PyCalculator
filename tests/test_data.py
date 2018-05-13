@@ -1,4 +1,5 @@
 from pycalclib.Data import Data, Variable
+from pycalclib.Manager import Manager
 
 
 def test_Data_equality():
