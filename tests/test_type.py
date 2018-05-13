@@ -3,6 +3,7 @@
 
 from pycalclib.type.Integer import Integer
 from pycalclib.type.Hexadecimal import Hexadecimal
+from pycalclib.type.String import String
 
 
 # Integer tests
@@ -45,9 +46,9 @@ def test_Integer_toBytes():
 
 def test_Integer_toString():
     i = Integer()
-    assert i.toString('654') == '654'
-    assert i.toString('0') == '0'
-    assert i.toString('-10') == '-10'
+    assert i.toString(654) == '654'
+    assert i.toString(0) == '0'
+    assert i.toString(-10) == '-10'
 
 
 # Hexadecimal tests
@@ -119,3 +120,41 @@ def test_Hexadecimal_toString():
     assert h.toString(b'\x42\x05\x06') == '42:05:06'
     assert h.toString(b'\x06\x07\x08\x09') == '06:07:08:09'
     assert h.toString(b'\x05\x12\x04') == '05:12:04'
+
+
+# String tests
+
+def test_String_format():
+    s = String()
+    assert s.format("Hello") == "Hello"
+    assert s.format("") == ""
+    assert s.format("a@!é`èL^&àç") == "a@!é`èL^&àç"
+
+
+def test_String_detect():
+    s = String()
+    assert s.detect("Hello")
+    assert s.detect("")
+    assert s.detect("a@!é`èL^&àç")
+
+
+def test_String_fromBytes():
+    s = String()
+    assert s.fromBytes(b"Hello") == "Hello"
+    assert s.fromBytes(b"") == ""
+    assert s.fromBytes(b'a@!\xc3\xa9`\xc3\xa8L^&\xc3\xa0\xc3\xa7') == "a@!é`èL^&àç"
+    # assert s.fromBytes(b'\xf6') == -10
+
+
+def test_String_toBytes():
+    s = String()
+    assert s.toBytes("Hello") == b"Hello"
+    assert s.toBytes("") == b""
+    assert s.toBytes("a@!é`èL^&àç") == b'a@!\xc3\xa9`\xc3\xa8L^&\xc3\xa0\xc3\xa7'
+
+
+def test_String_toString():
+    s = String()
+    assert s.toString("Hello") == "Hello"
+    assert s.toString("") == ""
+    assert s.toString("a@!é`èL^&àç") == "a@!é`èL^&àç"
