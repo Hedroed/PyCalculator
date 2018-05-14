@@ -75,16 +75,27 @@ def test_ExecutorLine_parentesis_optimisation():
 
 def test_scope_heap_creation():
     line = ExecutionLine("1 + 1")
-    scope = Scope(line)
+    scope = Scope(line, Storage())
 
     assert scope.heap == ["1", "+", "1"]
 
     line2 = ExecutionLine("a as hex + (14 % 4)")
-    scope2 = Scope(line)
+    scope2 = Scope(line, Storage())
 
     assert scope2.heap == ["a", "as", "hex", "+", "(14 % 4)"]
 
     line3 = ExecutionLine("\"une phrase\" as hex")
-    scope3 = Scope(line)
+    scope3 = Scope(line, Storage())
 
     assert scope3.heap == ["\"une phrase\"", "as", "hex"]
+
+
+def test_scope_run():
+    line = ExecutionLine("1 + 1")
+    scope = Scope(line, Storage())
+    res = scope.run()
+
+    expecedResult = ExecutionResult(
+        Data(Manager.getTypeByClassName('Integer'), 2))
+
+    assert res == expecedResult
