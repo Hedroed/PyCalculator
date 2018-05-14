@@ -51,7 +51,7 @@ class Scope():
         if type(line) is not ExecutionLine:
             raise Exception("Args line must be of type ExecutionLine")
 
-        self.originalLine = line
+        self.line = line
         self.storage = storage
 
         self._createInstructionHeap()
@@ -91,18 +91,39 @@ class ExecutionLine():
     """
 
     def __init__(self, line):
-        self.line = line
+        self.original = line
 
-    def _countQuote():
-        pass
+        self._applyCorrection()
 
-    def _countParentesis():
-        pass
-
-    def getLineString():
-        """Return the line with correction.
+    def _countQuote(self):
+        """Maybe useless.
         """
         pass
+
+    def _countParentesis(self):
+        """Maybe useless.
+        """
+        pass
+
+    def _applyCorrection(self):
+        pass
+
+    def split(self):
+        """Split the line at space character.
+
+        Don't cut space in parentesis and in quote.
+        """
+        pass
+
+    def getLine(self):
+        """Return the line with correction.
+        """
+        return self.line
+
+    def getOriginalLine(self):
+        """Return the line with NO correction.
+        """
+        return self.original
 
 
 class ExecutionResult():

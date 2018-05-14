@@ -73,6 +73,16 @@ def test_ExecutorLine_parentesis_optimisation():
     assert line.line == "1 + (2 * 2)"
 
 
+def test_ExecutorLine_split():
+    line = ExecutionLine(
+        "\"a text example\" as bytes * (0b11111111 % a as hex)")
+
+    split = line.split()
+
+    assert split == ["\"a text example\"", "as",
+                     "bytes", "*", "(0b11111111 % a as hex)"]
+
+
 def test_scope_heap_creation():
     line = ExecutionLine("1 + 1")
     scope = Scope(line, Storage())
@@ -82,7 +92,8 @@ def test_scope_heap_creation():
     line2 = ExecutionLine("a as hex + (14 % 4)")
     scope2 = Scope(line, Storage())
 
-    assert scope2.heap == ["a", "as", "hex", "+", "(14 % 4)"]
+    assert type(scope2.heap[-1]) is Scope
+    assert scope2.heap[-1].line.getOriginalLine() == "14 % 4"
 
     line3 = ExecutionLine("\"une phrase\" as hex")
     scope3 = Scope(line, Storage())
