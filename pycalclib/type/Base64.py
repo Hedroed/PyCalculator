@@ -17,7 +17,7 @@ class Base64(BaseType):
 
     def format(self, value):
         '''Format string to Base64'''
-        return b64decode(value)
+        return value.encode()
         # toBytes et format, type de retour de format = type d'entrée de format ?
 
     def detect(self, value):
@@ -33,7 +33,7 @@ class Base64(BaseType):
 
     def toBytes(self, _bytes):
         '''Convert base64 to bytes'''
-        return _bytes
+        return b64decode(_bytes)
 
     def toString(self, value):
         '''Return value (base64) as string'''
