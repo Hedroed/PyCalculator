@@ -38,24 +38,36 @@ class Scope():
 
         145 -> at the end current_value is (145, Integer)
 
+    Args:
+        line (ExecutionLine): The line of instructions of this scope
+        storage (Storage): The global storage to store and get variables
+
     """
 
     heap = None
     current_value = None
 
-    def __init__(self, line):
+    def __init__(self, line, storage):
         if type(line) is not ExecutionLine:
             raise Exception("Args line must be of type ExecutionLine")
 
         self.originalLine = line
+        self.storage = storage
+
+        self._createInstructionHeap()
 
     def _createInstructionHeap(self):
-        """Cut the line string into separate intruction
+        """Cut the line string into separate intruction and put them in heap.
+
+        If get instruction in parentesis created a inner scope
+        with value into parentesis as instruction line.
+
+        Heap can contain String or inner Scope.
         """
         pass
 
-    def start():
-        """Start execution of instructions of this scope.
+    def run(self):
+        """Execute instructions of the heap of this scope.
 
         If an instruction is a scope (insttruction with parentesis),
         it will create a Scope and run it.
