@@ -35,7 +35,7 @@ def test_basic_math_operation():
     assert res == expecedResult
 
 
-def test_convertion_int_to_hex():
+def test_conversion_int_to_hex():
     i = Interpretor()
 
     res = i.interpret("42 to hex")

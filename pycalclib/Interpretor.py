@@ -1,5 +1,5 @@
 """
-Main class, contain entry point to use the pycalc syntaxe
+Main class, contain entry point to use the pycalc syntax
 """
 
 from .Storage import Storage
@@ -12,7 +12,7 @@ class Interpretor():
 
     def interpret(self, line):
         """
-        Compute a string with the pycalc syntaxe
+        Compute a string with the pycalc syntax
 
         Args:
             line (str): The string to interpret

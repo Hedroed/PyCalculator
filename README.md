@@ -352,7 +352,7 @@ Cut operation:
  - 12345678 to base64:
  1) Call `detect` of all **Type** and make list of possible **Type**: Here there is only 'Int'
  2) Call format method of `Int` and save data in **Data** object as *current value*
- 3) Find modifier: is `to` for convertion
+ 3) Find modifier: is `to` for conversion
  4) Find **Type** to convert: is `base64`
  5) Find if there is specific method in `Int` to convert to `base64`
  6) No specific method, so convert `Int` to default **Type**: `Bytes`

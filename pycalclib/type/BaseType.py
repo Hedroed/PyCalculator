@@ -8,7 +8,7 @@ class BaseType(ABC):
     """Define a abstract Type object
 
     Attributes:
-        name (str): The name of the type in pycalc syntaxe, if is None take the name of the class
+        name (str): The name of the type in pycalc syntax, if is None take the name of the class
     """
 
     name = None
