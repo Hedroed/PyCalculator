@@ -25,6 +25,20 @@ class Interpretor():
 
 
 class Scope():
+    """The scope represente a level of execution.
+
+    This is all the instruction to execute from left to right.
+    If a group of instructions are in parentesis, a new inner scope is created,
+    this new scope is placed in the instruction heap like an instruction.
+
+    current_value store the value return by the last set of instruction.
+
+    Exemples:
+        1 + 1 -> at the end current_value is (2, Integer)
+
+        145 -> at the end current_value is (145, Integer)
+
+    """
 
     heap = None
     current_value = None
@@ -57,6 +71,11 @@ class ExecutionLine():
 
     It can auto complete line who missing the first quote by counting the number of unescaped quote
     and if it's odd add a quote a the start of the line.
+
+    This object check that the number of parentesis and quote is even.
+    Else raise an error
+
+    TODO: Optimise parentesis: remove useless parentesis like (( something )) to ( something )
     """
 
     def __init__(self, line):
@@ -68,8 +87,16 @@ class ExecutionLine():
     def _countParentesis():
         pass
 
+    def getLineString():
+        """Return the line with correction.
+        """
+        pass
+
 
 class ExecutionResult():
+
+    original_line = None
+    line = None
 
     stacktrace = None
     created_vars = None
@@ -82,4 +109,13 @@ class ExecutionResult():
         pass
 
     def __eq__(self, other):
+        """Equality of result value
+        """
+        pass
+
+    def merge(self, result):
+        """Concat tow ExecutionResult.
+
+        Used by scope to add result of an inner scope.
+        """
         pass

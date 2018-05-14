@@ -340,6 +340,8 @@ Les variable seront stockées dans un dictionnaire avec :
 
 ### Interpretor
 
+![State example](docs/assets/PyCalcVariable.png)
+
 Ex: convert int to base64, save in variable and write in text file
 ```
 >>> 12345678 to base64 in myVar write /tmp/file.txt as textFile
