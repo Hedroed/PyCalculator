@@ -88,15 +88,8 @@ def test_Hexadecimal_detect():
 
 def test_Hexadecimal_fromBytes():
     h = Hexadecimal()
-    assert h.fromBytes(b'\x42\x56') == '4256'
-    assert h.fromBytes(b'\xab\xe5') == 'abe5'
-    assert h.fromBytes(b'\x01\x42\x56') == '014256'
-    assert h.fromBytes(b'\x42\x56') == '4256'
-    assert h.fromBytes(b'\x42\x56') == '4256'
-    assert h.fromBytes(b'\x42\x56') == '4256'
-    assert h.fromBytes(b'\x42\x05\x06') == '420506'
-    assert h.fromBytes(b'\x06\x07\x08\x09') == '06070809'
-    assert h.fromBytes(b'\x05\x12\x04') == '051204'
+    assert h.toBytes(b'\x42\x56') == b'\x42\x56'
+    assert h.toBytes(b'') == b''
 
 
 def test_Hexadecimal_toBytes():
@@ -159,11 +152,10 @@ def test_String_toString():
 
 def test_Base64_format():
     b64 = Base64()
-    assert b64.format('SGVsbG8=') == b"Hello"
-    assert b64.format(' SGVsbG8= ') == b"Hello"
+    assert b64.format("Hello") == b"Hello"
     assert b64.format("") == b""
-    assert b64.format("YUAhw6lgw6hMXibDoMOn") == "a@!é`èL^&àç".encode()
-    assert b64.format("AwQF") == b"\x03\x04\x05"
+    assert b64.format("a@!é`èL^&àç") == "a@!é`èL^&àç".encode()
+    assert b64.format("\x03\x04\x05") == b"\x03\x04\x05"
 
 
 def test_Base64_detect():
@@ -188,10 +180,10 @@ def test_Base64_fromBytes():
 
 def test_Base64_toBytes():
     b64 = Base64()
-    assert b64.toBytes(b"Hello") == b"Hello"
+    assert b64.toBytes(b'SGVsbG8=') == b"Hello"
     assert b64.toBytes(b"") == b""
-    assert b64.toBytes("a@!é`èL^&àç".encode()) == "a@!é`èL^&àç".encode()
-    assert b64.toBytes(b"\x03\x04\x05") == b"\x03\x04\x05"
+    assert b64.toBytes(b"YUAhw6lgw6hMXibDoMOn") == "a@!é`èL^&àç".encode()
+    assert b64.toBytes(b"AwQF") == b"\x03\x04\x05"
 
 
 def test_Base64_toString():
