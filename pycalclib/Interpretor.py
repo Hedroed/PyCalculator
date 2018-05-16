@@ -98,7 +98,21 @@ class ExecutionLine():
     def _countQuote(self):
         """Maybe useless.
         """
-        pass
+        escaped = False
+        ret = 0
+
+        for i, v in enumerate(self.line):
+            if v == '\\':
+                escaped = True
+                continue
+            if escaped:
+                escaped = False
+                continue
+
+            if v == '"':
+                ret += 1
+
+        return ret
 
     def _countParentesis(self):
         """Maybe useless.
@@ -106,8 +120,10 @@ class ExecutionLine():
         pass
 
     def _applyCorrection(self):
-        # TODO
         self.line = self.original
+
+        if self._countQuote() % 2 == 1:
+            self.line = '"' + self.line
 
     def split(self):
         """Split the line at space character.
