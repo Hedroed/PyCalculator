@@ -146,7 +146,7 @@ class ExecutionLine():
         inQuote = False
         escaped = False
 
-        lastEpace = 0
+        lastEspace = 0
 
         line = str(self.line)
         for i, v in enumerate(self.line):
@@ -158,8 +158,8 @@ class ExecutionLine():
                 continue
 
             if v == ' ' and parentesisDepth == 0 and not inQuote:
-                ret.append(self.line[lastEpace:i])
-                lastEpace = i + 1
+                ret.append(self.line[lastEspace:i])
+                lastEspace = i + 1
 
             if v == '(':
                 parentesisDepth += 1
@@ -168,7 +168,7 @@ class ExecutionLine():
             elif v == '"':
                 inQuote = not inQuote
 
-        ret.append(self.line[lastEpace:])
+        ret.append(self.line[lastEspace:])
         return ret
 
     def getLine(self):
