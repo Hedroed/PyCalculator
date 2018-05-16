@@ -90,21 +90,21 @@ def test_ExecutorLine_split():
 
 
 def test_scope_heap_creation():
-    line = ExecutionLine("1 + 1")
+    line = ExecutionLine("1 + 2")
     scope = Scope(line, Storage())
 
-    assert scope.heap == ["1", "+", "1"]
+    assert scope.heap == ["2", "+", "1"]
 
     line2 = ExecutionLine("a as hex + (14 % 4)")
-    scope2 = Scope(line, Storage())
+    scope2 = Scope(line2, Storage())
 
-    assert type(scope2.heap[-1]) is Scope
-    assert scope2.heap[-1].line.getOriginalLine() == "14 % 4"
+    assert type(scope2.heap[0]) is Scope
+    assert scope2.heap[0].line.getOriginalLine() == "14 % 4"
 
     line3 = ExecutionLine("\"une phrase\" as hex")
-    scope3 = Scope(line, Storage())
+    scope3 = Scope(line3, Storage())
 
-    assert scope3.heap == ["\"une phrase\"", "as", "hex"]
+    assert scope3.heap == ["hex", "as", "\"une phrase\""]
 
 
 def test_scope_run():

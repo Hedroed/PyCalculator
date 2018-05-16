@@ -64,7 +64,17 @@ class Scope():
 
         Heap can contain String or inner Scope.
         """
-        pass
+        self.heap = []
+
+        instructions = reversed(self.line.split())
+        for i in instructions:
+            if i.startswith("(") and i.endswith(")"):
+                innerLine = i[1:-1]
+                if innerLine != "":
+                    innerLineEx = ExecutionLine(innerLine)
+                    self.heap.append(Scope(innerLineEx, self.storage))
+            else:
+                self.heap.append(i)
 
     def run(self):
         """Execute instructions of the heap of this scope.
