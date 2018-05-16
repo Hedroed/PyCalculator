@@ -82,6 +82,12 @@ def test_ExecutorLine_split():
     assert split == ["\"a text example\"", "as",
                      "bytes", "*", "(0b11111111 % a as hex)"]
 
+    line = ExecutionLine("\(\\\" as hex")
+
+    split = line.split()
+
+    assert split == ["\(\\\"", "as", "hex"]
+
 
 def test_scope_heap_creation():
     line = ExecutionLine("1 + 1")

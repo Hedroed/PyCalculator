@@ -106,14 +106,44 @@ class ExecutionLine():
         pass
 
     def _applyCorrection(self):
-        pass
+        # TODO
+        self.line = self.original
 
     def split(self):
         """Split the line at space character.
 
         Don't cut space in parentesis and in quote.
         """
-        pass
+        ret = []
+
+        parentesisDepth = 0
+        inQuote = False
+        escaped = False
+
+        lastEpace = 0
+
+        line = str(self.line)
+        for i, v in enumerate(self.line):
+            if v == '\\':
+                escaped = True
+                continue
+            if escaped:
+                escaped = False
+                continue
+
+            if v == ' ' and parentesisDepth == 0 and not inQuote:
+                ret.append(self.line[lastEpace:i])
+                lastEpace = i + 1
+
+            if v == '(':
+                parentesisDepth += 1
+            elif v == ')':
+                parentesisDepth -= 1
+            elif v == '"':
+                inQuote = not inQuote
+
+        ret.append(self.line[lastEpace:])
+        return ret
 
     def getLine(self):
         """Return the line with correction.
