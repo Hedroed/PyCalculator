@@ -2,7 +2,7 @@
 # coding: utf-8
 
 from .BaseType import BaseType
-# import registerType de je ne sais où ?
+from ..Manager import Register
 from base64 import b64encode, b64decode
 import re
 
@@ -41,4 +41,4 @@ class Base64(BaseType):
 
 
 # Register the type
-# registerType(Base64())
+Register.registerType(Base64())

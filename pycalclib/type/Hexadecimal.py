@@ -2,7 +2,7 @@
 # coding: utf-8
 
 from .BaseType import BaseType
-# import registerType de je ne sais où ?
+from ..Manager import Register
 import re
 
 
@@ -50,4 +50,4 @@ class Hexadecimal(BaseType):
 
 
 # Register the type
-# registerType(Hexadecimal())
+Register.registerType(Hexadecimal())

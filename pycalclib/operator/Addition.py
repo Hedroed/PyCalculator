@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 # coding: utf-8
 
-import BaseOperator
-# import registerOperator de je ne sais où ?
+from .BaseOperator import BaseOperator
+from ..Manager import Register
 
 
 class Addition(BaseOperator):
@@ -10,8 +10,8 @@ class Addition(BaseOperator):
     symbols = ['+']
 
     def __init__(self):
-        self.registerOperationFor('Hex', self.hexOp)
-
+        # self.registerOperationFor('Hex', self.hexOp)
+        pass
 
     def compute(self, first, second):
         return first + second
@@ -21,4 +21,4 @@ class Addition(BaseOperator):
 
 
 # Register the operator
-registerOperator(Addition())
+Register.registerOperator(Addition())

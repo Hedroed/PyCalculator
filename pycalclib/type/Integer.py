@@ -2,7 +2,7 @@
 # coding: utf-8
 
 from .BaseType import BaseType
-# import registerType de je ne sais où ?
+from ..Manager import Register
 import re
 
 
@@ -37,4 +37,4 @@ class Integer(BaseType):
 
 
 # Register the type
-# registerType(Integer())
+Register.registerType(Integer())

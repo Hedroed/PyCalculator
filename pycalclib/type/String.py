@@ -2,7 +2,7 @@
 # coding: utf-8
 
 from .BaseType import BaseType
-# import registerType de je ne sais où ?
+from ..Manager import Register
 
 
 class String(BaseType):
@@ -36,4 +36,4 @@ class String(BaseType):
 
 
 # Register the type
-# registerType(String())
+Register.registerType(String())
