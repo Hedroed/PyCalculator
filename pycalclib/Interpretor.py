@@ -4,6 +4,12 @@ Main class, contain entry point to use the pycalc syntax
 
 from .Storage import Storage
 
+from .operator.Addition import Addition
+from .type.Base64 import Base64
+from .type.Hexadecimal import Hexadecimal
+from .type.Integer import Integer
+from .type.String import String
+
 
 class Interpretor():
 
