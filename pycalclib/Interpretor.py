@@ -3,6 +3,8 @@ Main class, contain entry point to use the pycalc syntax
 """
 
 from .Storage import Storage
+from .Data import Data, Variable
+from .Manager import Register
 
 from .operator.Addition import Addition
 from .type.Base64 import Base64
@@ -91,7 +93,33 @@ class Scope():
         Returns:
             ExecutionResult: the result of execution of the scope.
         """
-        pass
+
+        while len(self.heap) > 0:
+            inst = self.heap.pop()
+            print("Exec %s" % inst)
+
+            ops = Register.getOperatorsBySymbols(inst)
+
+            ops_cnt = len(ops)
+            if ops_cnt >= 1:
+                if ops_cnt > 1:
+                    raise Exception("Multiple operation found %s" % ops)
+                op = ops[0]
+                print("Operator %s" % op)
+
+            else:
+                dataTypes = Register.getValueType(inst)
+
+                if len(dataTypes) == 0:
+                    raise Exception("No type for value %s" % inst)
+                elif len(dataTypes) > 1:
+                    raise Exception(
+                        "Multiple type for value %s: %s" % (inst, dataTypes))
+
+                dataType = dataTypes[0]
+                value = Data(dataType, dataType.format(inst))
+
+                print("Data %s" % value)
 
 
 class ExecutionLine():
