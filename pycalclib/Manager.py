@@ -4,6 +4,8 @@ The manager contain the list of all available Operators, Types and Functions.
 It provide methods to register new elements.
 It is used by Interpretor to get correct elements by name.
 """
+from typing import List, Optional
+
 from .type.BaseType import BaseType
 from .operator.BaseOperator import BaseOperator
 
@@ -11,11 +13,11 @@ from .operator.BaseOperator import BaseOperator
 class Manager():
     """Manager
     """
-    typesClass = []
+    typesClass: List[BaseType] = []
 
-    operatorsClass = []
+    operatorsClass: List[BaseOperator] = []
 
-    def registerOperator(self, operator):
+    def registerOperator(self, operator: BaseOperator) -> bool:
         if operator in self.operatorsClass:
             return False
 
@@ -27,7 +29,7 @@ class Manager():
 
         return True
 
-    def registerType(self, type):
+    def registerType(self, type: BaseType) -> bool:
         if type in self.typesClass:
             return False
 
@@ -38,15 +40,15 @@ class Manager():
 
         return True
 
-    def getOperatorsByName(self, name):
+    def getOperatorsBySymbols(self, name: str) -> List[BaseOperator]:
         ret = []
         for op in self.operatorsClass:
-            if op.name == name:
+            if name in op.symbols:
                 ret.append(op)
 
         return ret
 
-    def getTypesByName(self, name):
+    def getTypesByName(self, name: str) -> List[BaseType]:
         ret = []
         for t in self.typesClass:
             if t.name == name:
@@ -54,15 +56,26 @@ class Manager():
 
         return ret
 
-    def getTypeByClassName(self, name):
+    def getValueType(self, data: str) -> List[BaseType]:
+        ret = []
+
+        for _type in self.typesClass:
+            if _type.detect(data):
+                ret.append(_type)
+
+        return ret
+
+    def getTypeByClassName(self, name: str) -> Optional[BaseType]:
         for t in self.typesClass:
             if t.__class__.__name__ == name:
                 return t
+        return None
 
-    def getOperatorByClassName(self, name):
+    def getOperatorByClassName(self, name: str) -> Optional[BaseOperator]:
         for op in self.operatorsClass:
             if op.__class__.__name__ == name:
                 return op
+        return None
 
 
 Register = Manager()

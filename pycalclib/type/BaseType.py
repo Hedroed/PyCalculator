@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 # coding: utf-8
+from typing import Any
 
 from abc import ABC, abstractmethod
 
@@ -13,14 +14,14 @@ class BaseType(ABC):
 
     name = None
 
-    def getName(self):
+    def getName(self) -> str:
         if self.name:
             return self.name
         else:
             return self.__class__.__name__
 
     @abstractmethod
-    def format(self, value):
+    def format(self, value: str) -> Any:
         """Transform an input value to the form which represent the value.
 
         The value return by format will be store in variable.
@@ -34,7 +35,7 @@ class BaseType(ABC):
         pass
 
     @abstractmethod
-    def detect(self, value):
+    def detect(self, value: str) -> bool:
         """Method used to allow pycalc to automatically detect the type of the value.
 
         If return True this value can be of this type.
@@ -48,7 +49,7 @@ class BaseType(ABC):
         pass
 
     @abstractmethod
-    def fromBytes(self, _bytes):
+    def fromBytes(self, _bytes: bytes) -> Any:
         """Create a value of this type from a Python primitive bytes.
 
         This method is call to convert types.
@@ -62,7 +63,7 @@ class BaseType(ABC):
         pass
 
     @abstractmethod
-    def toBytes(self, value):
+    def toBytes(self, value: Any) -> bytes:
         """Turn a value of this type in Python primitive bytes.
 
         This method is call to convert types.
@@ -77,7 +78,7 @@ class BaseType(ABC):
         pass
 
     @abstractmethod
-    def toString(self, value):
+    def toString(self, value: Any) -> str:
         """Used to convert a value of this type to this String representation.
 
         Call to display the value to the user.
