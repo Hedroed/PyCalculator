@@ -17,15 +17,23 @@ class Base64(BaseType):
 
     def format(self, value):
         '''Format string to Base64'''
+
+        ret = re.match('^(?b64:)?([A-Za-z0-9+/]*={0,2})$', value)
+        if ret is None:
+            raise Exception("Not a base64: %s" % value)
+
+        value = ret.group(1)
+        print('OK: %s' % value)
+
         return value.encode()
-        # toBytes et format, type de retour de format = type d'entrée de format ?
 
     def detect(self, value):
         '''Is value a base64 string ?
             A base64 string is composed of uppercase and lowercase letters,
             digits (O to 9), +, / and =.
+            Auto detect if start with 'b64:'
         '''
-        return re.match('^\s*[A-Za-z0-9+/]*={0,2}\s*$', value) is not None
+        return re.match('^b64:[A-Za-z0-9+/]*={0,2}$', value) is not None
 
     def fromBytes(self, _bytes):
         '''Convert bytes to base64'''

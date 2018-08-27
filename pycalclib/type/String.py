@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 # coding: utf-8
 
+import re
+
 from .BaseType import BaseType
 from ..Manager import Register
 
@@ -20,7 +22,7 @@ class String(BaseType):
         '''Is value a String ?
             We consider everything is a String
         '''
-        return True
+        return re.match(r'^".*"$', value) is not None
 
     def fromBytes(self, _bytes):
         '''Convert bytes to String'''

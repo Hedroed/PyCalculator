@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # coding: utf-8
-from typing import Any
+from typing import Any, Optional
 
 from abc import ABC, abstractmethod
 
@@ -12,7 +12,7 @@ class BaseType(ABC):
         name (str): The name of the type in pycalc syntax, if is None take the name of the class
     """
 
-    name = None
+    name: Optional[str] = None
 
     def getName(self) -> str:
         if self.name:
@@ -90,3 +90,6 @@ class BaseType(ABC):
             str: a string representation of the value
         """
         pass
+
+    def __repr__(self):
+        return "Type<%s>" % self.getName()

@@ -88,6 +88,12 @@ def test_ExecutorLine_split():
 
     assert split == ["\(\\\"", "as", "hex"]
 
+    line = ExecutionLine(" 1     +       1   ")
+
+    split = line.split()
+
+    assert split == ["1", "+", "1"]
+
 
 def test_scope_heap_creation():
     line = ExecutionLine("1 + 2")
@@ -114,5 +120,7 @@ def test_scope_run():
 
     expecedResult = ExecutionResult(
         Data(Register.getTypeByClassName('Integer'), 2))
+
+    print(res.show())
 
     assert res == expecedResult

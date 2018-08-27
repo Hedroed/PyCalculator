@@ -33,7 +33,7 @@ class Hexadecimal(BaseType):
             An hexadecimal value can preceded by '\\x' or '0x'.
             Spaces can be presents in an hexadecimal string.
         '''
-        return re.match(r'^\s*((\\x|0x)?[0-9a-fA-F\s]+)+\s*$', value) is not None
+        return re.match(r'^((\\x|0x)[0-9a-fA-F\s]+)+$', value) is not None
 
     def fromBytes(self, _bytes):
         '''Convert bytes to bytes (do nothing)'''

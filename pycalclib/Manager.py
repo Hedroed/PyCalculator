@@ -25,6 +25,10 @@ class Manager():
             raise Exception(
                 "Class %s is not a subclass of BaseOperator" % operator)
 
+        if operator.length < 1:
+            raise Exception(
+                "Operator %s length must be more then 0" % operator)
+
         self.operatorsClass.append(operator)
 
         return True

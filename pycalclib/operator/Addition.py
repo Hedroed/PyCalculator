@@ -6,8 +6,9 @@ from ..Manager import Register
 
 
 class Addition(BaseOperator):
-    default = 'Int'
+    default = 'int'
     symbols = ['+']
+    length = 2
 
     def __init__(self):
         # self.registerOperationFor('Hex', self.hexOp)

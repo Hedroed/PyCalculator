@@ -1,3 +1,5 @@
+from .type.BaseType import BaseType
+
 
 class Data():
     def __init__(self, type, value):
@@ -5,6 +7,8 @@ class Data():
         self.value = value
 
     def __eq__(self, other):
+        if other == None:
+            return False
         return (self.type == other.type and
                 self.value == other.value)
 
@@ -14,6 +18,18 @@ class Data():
             typeName = self.type.name
 
         return "Data(%s, %s)" % (typeName, self.value)
+
+    def toString(self):
+        return self.type.toString(self.value)
+
+    def convert(self, toType: BaseType) -> "Data":
+        if toType == self.type:
+            return Data(self.type, self.value)
+        _bytes = self.type.toBytes(self.value)
+
+        newValue = toType.fromBytes(_bytes)
+
+        return Data(toType, newValue)
 
 
 class Variable():
