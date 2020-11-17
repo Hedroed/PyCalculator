@@ -1,6 +1,6 @@
 # PyCalculator
 
-Simple syntax for complex data transformations.
+ :warning: Aborted :warning: Simple syntax for complex data transformations.
 
 ## Requirements
 
